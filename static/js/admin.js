@@ -5,6 +5,7 @@ let currentEditId = null;
 // Load schedule on page load
 document.addEventListener('DOMContentLoaded', function() {
     loadSchedule();
+    loadRequests();
 });
 
 // Load all schedule items
@@ -193,5 +194,103 @@ window.onclick = function(event) {
     const modal = document.getElementById('eventModal');
     if (event.target === modal) {
         closeModal();
+ 
+
+// Load event booking requests
+async function loadRequests() {
+    try {
+        const response = await fetch('/api/admin/requests');
+        if (response.status === 401) {
+            window.location.href = '/admin.html';
+            return;
+        }
+        
+        const data = await response.json();
+        displayRequests(data.requests || []);
+    } catch (error) {
+        console.error('Error loading requests:', error);
     }
+}
+
+// Display requests in table
+function displayRequests(requests) {
+    const tbody = document.getElementById('requests-tbody');
+    tbody.innerHTML = '';
+    
+    if (requests.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; font-style: italic;">No booking requests</td></tr>';
+        return;
+    }
+    
+    requests.forEach((request, index) => {
+        const row = document.createElement('tr');
+        const eventDate = new Date(request.event_date).toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric' 
+        });
+        const submittedDate = new Date(request.submitted_at).toLocaleDateString('en-US', { 
+            month: 'short', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        
+        row.innerHTML = `
+            <td><strong>${request.name}</strong></td>
+            <td>${eventDate}</td>
+            <td>${request.location}</td>
+            <td>${request.event_type}</td>
+            <td>${request.guest_count}</td>
+            <td>
+                <div style="font-size: 0.85rem;">
+                    <div>${request.email}</div>
+                    <div>${request.phone}</div>
+                </div>
+            </td>
+            <td style="font-size: 0.85rem;">${submittedDate}</td>
+            <td class="action-btns">
+                <button class="delete-btn" onclick="deleteRequest(${index})">Delete</button>
+            </td>
+        `;
+        
+        // Add details row if there are additional details
+        if (request.details) {
+            const detailsRow = document.createElement('tr');
+            detailsRow.innerHTML = `
+                <td colspan="8" style="background: rgba(200, 90, 23, 0.05); padding: 0.5rem 1rem; font-style: italic;">
+                    <strong>Details:</strong> ${request.details}
+                </td>
+            `;
+            tbody.appendChild(row);
+            tbody.appendChild(detailsRow);
+        } else {
+            tbody.appendChild(row);
+        }
+    });
+}
+
+// Delete request
+async function deleteRequest(index) {
+    if (!confirm('Are you sure you want to delete this booking request?')) {
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/admin/requests/${index}`, {
+            method: 'DELETE'
+        });
+        
+        if (response.ok) {
+            showMessage('Request deleted successfully', 'success');
+            loadRequests();
+        } else {
+            const data = await response.json();
+            showMessage(data.error || 'Delete failed', 'error');
+        }
+    } catch (error) {
+        console.error('Error deleting request:', error);
+        showMessage('Error deleting request', 'error');
+    }
+}   }
 }

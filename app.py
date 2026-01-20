@@ -277,6 +277,44 @@ def delete_schedule_item(schedule_id):
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/api/admin/requests', methods=['GET'])
+@login_required
+def get_event_requests():
+    """Get all event booking requests"""
+    try:
+        with open(REQUESTS_FILE, 'r') as f:
+            data = json.load(f)
+        
+        # Sort by submission date (newest first)
+        requests = data.get('requests', [])
+        requests.sort(key=lambda x: x.get('submitted_at', ''), reverse=True)
+        
+        return jsonify({'requests': requests})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/admin/requests/<int:request_index>', methods=['DELETE'])
+@login_required
+def delete_event_request(request_index):
+    """Delete an event request"""
+    try:
+        with open(REQUESTS_FILE, 'r') as f:
+            requests_data = json.load(f)
+        
+        if 0 <= request_index < len(requests_data['requests']):
+            requests_data['requests'].pop(request_index)
+            
+            with open(REQUESTS_FILE, 'w') as f:
+                json.dump(requests_data, f, indent=2)
+            
+            return jsonify({'message': 'Request deleted successfully'}), 200
+        else:
+            return jsonify({'error': 'Request not found'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 if __name__ == '__main__':
     # For production, set debug=False and use a WSGI server like gunicorn
     app.run(debug=True, host='0.0.0.0', port=8000)
