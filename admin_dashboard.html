@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Southern Mommas Delight</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .logout-btn {
+            background: linear-gradient(to bottom, #efebe9 0%, #d7ccc8 100%);
+            color: #c85a17;
+            padding: 0.5rem 1rem;
+            border: 2px solid #c85a17;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .add-event-btn {
+            background: linear-gradient(to bottom, #ffccbc 0%, #ffab91 100%);
+            color: #c85a17;
+            padding: 0.75rem 1.5rem;
+            border: 3px solid #c85a17;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .schedule-table th,
+        .schedule-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 2px solid #d7ccc8;
+        }
+        .schedule-table th {
+            background: linear-gradient(to bottom, #efebe9 0%, #d7ccc8 100%);
+            color: #c85a17;
+            font-weight: bold;
+        }
+        .action-btns {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .edit-btn, .delete-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #c85a17;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .edit-btn {
+            background: #ffccbc;
+            color: #c85a17;
+        }
+        .delete-btn {
+            background: #ef9a9a;
+            color: #c62828;
+            border-color: #c62828;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+        }
+        .modal-content {
+            background: linear-gradient(to bottom, #fbe9e7 0%, #efebe9 100%);
+            margin: 5% auto;
+            padding: 2rem;
+            border: 3px solid #a1887f;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+        }
+        .modal-title {
+            color: #c85a17;
+            margin-bottom: 1.5rem;
+        }
+        .close-modal {
+            float: right;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #c85a17;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🏚️ Southern Mommas Delight 🌾</h1>
+            <p class="tagline">Admin Dashboard</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <div class="admin-header">
+                <h2>Manage Schedule</h2>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+            
+            <button class="add-event-btn" onclick="openAddModal()">+ Add New Event</button>
+            
+            <div id="schedule-container">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Location</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="schedule-tbody">
+                        <!-- Schedule items will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="message" class="form-message"></div>
+        </section>
+    </main>
+
+    <!-- Add/Edit Modal -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 class="modal-title" id="modal-title">Add Event</h2>
+            
+            <form id="event-form">
+                <input type="hidden" id="event-id">
+                
+                <div class="form-group">
+                    <label for="event-date">Date *</label>
+                    <input type="date" id="event-date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="event-time">Time *</label>
+                    <input type="time" id="event-time" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="event-location">Location *</label>
+                    <input type="text" id="event-location" placeholder="e.g., Main Street Market" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">Save Event</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Southern Mommas Delight. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="static/js/admin.js"></script>
+</body>
+</html>
