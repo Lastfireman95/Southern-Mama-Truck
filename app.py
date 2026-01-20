@@ -8,6 +8,7 @@ app = Flask(__name__, static_folder='static')
 # Path to data files
 SCHEDULE_FILE = 'data/schedule.json'
 REQUESTS_FILE = 'data/event_requests.json'
+PRODUCTS_FILE = 'data/products.json'
 
 # Ensure data directory exists
 os.makedirs('data', exist_ok=True)
@@ -21,11 +22,39 @@ if not os.path.exists(REQUESTS_FILE):
     with open(REQUESTS_FILE, 'w') as f:
         json.dump({'requests': []}, f)
 
+if not os.path.exists(PRODUCTS_FILE):
+    with open(PRODUCTS_FILE, 'w') as f:
+        json.dump({'products': []}, f)
+
 
 @app.route('/')
 def index():
     """Serve the main HTML page"""
     return send_from_directory('.', 'index.html')
+
+
+@app.route('/products.html')
+def products():
+    """Serve the products page"""
+    return send_from_directory('.', 'products.html')
+
+
+@app.route('/events.html')
+def events():
+    """Serve the events page"""
+    return send_from_directory('.', 'events.html')
+
+
+@app.route('/api/products', methods=['GET'])
+def get_products():
+    """Get the list of products"""
+    try:
+        with open(PRODUCTS_FILE, 'r') as f:
+            data = json.load(f)
+        
+        return jsonify({'products': data.get('products', [])})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 @app.route('/api/schedule', methods=['GET'])
@@ -84,7 +113,7 @@ def submit_event_request():
         return jsonify({'error': str(e)}), 500
 
 
-@app.route('/api/schedule', methods=['POST'])
+@app.route('/api/admin/schedule', methods=['POST'])
 def add_schedule_item():
     """Add a new schedule item (admin endpoint)"""
     try:
@@ -117,4 +146,5 @@ def add_schedule_item():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # For production, set debug=False and use a WSGI server like gunicorn
+    app.run(debug=True, host='0.0.0.0', port=8000)

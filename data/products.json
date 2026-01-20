@@ -1,0 +1,52 @@
+{
+  "products": [
+    {
+      "name": "Southern Fried Chicken",
+      "description": "Crispy, golden fried chicken seasoned with our special blend of herbs and spices",
+      "price": "12.99",
+      "emoji": "🍗"
+    },
+    {
+      "name": "BBQ Pulled Pork Sandwich",
+      "description": "Tender pulled pork smothered in our homemade BBQ sauce on a toasted bun",
+      "price": "10.99",
+      "emoji": "🥪"
+    },
+    {
+      "name": "Mac & Cheese",
+      "description": "Creamy, cheesy macaroni made the traditional Southern way",
+      "price": "6.99",
+      "emoji": "🧀"
+    },
+    {
+      "name": "Collard Greens",
+      "description": "Slow-cooked collard greens with smoked ham hock",
+      "price": "5.99",
+      "emoji": "🥬"
+    },
+    {
+      "name": "Cornbread",
+      "description": "Sweet, buttery cornbread baked fresh daily",
+      "price": "3.99",
+      "emoji": "🌽"
+    },
+    {
+      "name": "Peach Cobbler",
+      "description": "Warm peach cobbler with a buttery crust, served with vanilla ice cream",
+      "price": "7.99",
+      "emoji": "🍑"
+    },
+    {
+      "name": "Sweet Tea",
+      "description": "Classic Southern sweet tea, brewed fresh",
+      "price": "2.99",
+      "emoji": "🥤"
+    },
+    {
+      "name": "Biscuits & Gravy",
+      "description": "Fluffy buttermilk biscuits smothered in sausage gravy",
+      "price": "8.99",
+      "emoji": "🥐"
+    }
+  ]
+}

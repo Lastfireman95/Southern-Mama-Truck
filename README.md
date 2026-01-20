@@ -1,9 +1,11 @@
 # Southern Mommas Delight 🍴
 
-A mobile food truck storefront website for Southern Mommas Delight. This application allows customers to view upcoming locations and times where the food truck will be, and submit requests for the truck to attend private events.
+A mobile food truck storefront website for Southern Mommas Delight. This application allows customers to view upcoming locations and times where the food truck will be, browse the menu of products offered, and submit requests for the truck to attend private events.
 
 ## Features
 
+- **Multi-Page Navigation**: Separate pages for Home, Menu, and Event Booking
+- **Product Menu**: Browse delicious Southern comfort food items with descriptions and prices
 - **Schedule Display**: View upcoming dates, times, and locations where the food truck will be
 - **Event Booking**: Submit requests for the food truck to attend your events
 - **Responsive Design**: Mobile-friendly interface that works on all devices
@@ -44,16 +46,32 @@ A mobile food truck storefront website for Southern Mommas Delight. This applica
 
 2. Open your web browser and navigate to:
    ```
-   http://localhost:5000
+   http://localhost:8000
    ```
 
 The application will be running and ready to use!
 
 ## Usage
 
+### Navigation
+
+The website has three main pages accessible from the navigation menu:
+- **Home**: Welcome message and upcoming schedule locations
+- **Our Menu**: Browse all available food items with prices
+- **Book Us**: Submit event booking requests
+
+### Viewing the Menu
+
+Click "Our Menu" in the navigation or the "View Menu" button on the homepage to see:
+- Product names and descriptions
+- Prices for each item
+- Visual representation with emojis
+
+Products are displayed in a responsive grid layout that adapts to different screen sizes.
+
 ### Viewing the Schedule
 
-The homepage automatically displays all upcoming locations where Southern Mommas Delight will be. The schedule shows:
+The homepage displays all upcoming locations where Southern Mommas Delight will be. The schedule shows:
 - Date (formatted as day of week, month, day, year)
 - Time range
 - Location address or venue name
@@ -62,7 +80,7 @@ The homepage automatically displays all upcoming locations where Southern Mommas
 
 To request Southern Mommas Delight for your event:
 
-1. Scroll down to the "Book Us for Your Event" section
+1. Click "Book Us" in the navigation or the "Book for Event" button on the homepage
 2. Fill out the event request form with:
    - Your name
    - Email address
@@ -77,7 +95,25 @@ To request Southern Mommas Delight for your event:
 
 Event requests are stored in `data/event_requests.json` for the business owner to review.
 
-## Managing Schedule (For Admins)
+## Managing Content (For Admins)
+
+### Adding Products to the Menu
+
+To add new menu items:
+
+1. **Manually edit the products file**:
+   - Open `data/products.json`
+   - Add new entries following the existing format:
+     ```json
+     {
+       "name": "Product Name",
+       "description": "Product description",
+       "price": "9.99",
+       "emoji": "🍽️"
+     }
+     ```
+
+### Managing Schedule
 
 To add new locations to the schedule, you can either:
 
@@ -94,7 +130,7 @@ To add new locations to the schedule, you can either:
 
 2. **Use the API endpoint**:
    ```bash
-   curl -X POST http://localhost:5000/api/schedule \
+   curl -X POST http://localhost:8000/api/admin/schedule \
      -H "Content-Type: application/json" \
      -d '{
        "date": "2026-02-15",
@@ -108,25 +144,33 @@ To add new locations to the schedule, you can either:
 ```
 Southern-Mama-Truck/
 ├── app.py                  # Flask backend server
-├── index.html              # Main homepage
+├── index.html              # Main homepage with schedule
+├── products.html           # Menu/products page
+├── events.html             # Event booking page
 ├── requirements.txt        # Python dependencies
 ├── static/
 │   ├── css/
-│   │   └── style.css      # Styling
+│   │   └── style.css      # Styling for all pages
 │   └── js/
-│       └── app.js         # Frontend JavaScript
+│       ├── schedule.js    # Schedule page JavaScript
+│       ├── products.js    # Products page JavaScript
+│       └── events.js      # Events page JavaScript
 ├── data/
 │   ├── schedule.json      # Schedule data
+│   ├── products.json      # Menu items data
 │   └── event_requests.json # Event booking requests
 └── README.md
 ```
 
 ## API Endpoints
 
-- `GET /` - Serve the main webpage
+- `GET /` - Serve the main homepage
+- `GET /products.html` - Serve the products/menu page
+- `GET /events.html` - Serve the event booking page
+- `GET /api/products` - Get list of menu items
 - `GET /api/schedule` - Get upcoming schedule
 - `POST /api/event-request` - Submit an event booking request
-- `POST /api/schedule` - Add a new schedule item (admin)
+- `POST /api/admin/schedule` - Add a new schedule item (admin)
 
 ## License
 

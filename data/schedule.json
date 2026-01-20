@@ -24,6 +24,11 @@
       "date": "2026-02-08",
       "time": "10:00 AM - 3:00 PM",
       "location": "County Fair Grounds"
+    },
+    {
+      "date": "2026-02-15",
+      "time": "11:00 AM - 3:00 PM",
+      "location": "New Test Location"
     }
   ]
 }
