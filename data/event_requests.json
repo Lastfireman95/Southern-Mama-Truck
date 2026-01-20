@@ -1,0 +1,28 @@
+{
+  "requests": [
+    {
+      "name": "Test User",
+      "email": "test@example.com",
+      "phone": "555-1234",
+      "event_date": "2026-03-15",
+      "location": "Test Venue",
+      "event_type": "birthday",
+      "guest_count": "50",
+      "details": "Birthday party for my daughter",
+      "submitted_at": "2026-01-20T00:34:12.343058",
+      "status": "pending"
+    },
+    {
+      "name": "John Smith",
+      "email": "john@example.com",
+      "phone": "555-0123",
+      "event_date": "2026-03-20",
+      "location": "123 Main Street",
+      "event_type": "corporate",
+      "guest_count": "75",
+      "details": "",
+      "submitted_at": "2026-01-20T00:35:23.796662",
+      "status": "pending"
+    }
+  ]
+}

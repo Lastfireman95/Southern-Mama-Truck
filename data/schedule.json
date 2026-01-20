@@ -1,0 +1,29 @@
+{
+  "schedule": [
+    {
+      "date": "2026-01-25",
+      "time": "11:00 AM - 3:00 PM",
+      "location": "Downtown Farmers Market, Main Street"
+    },
+    {
+      "date": "2026-01-27",
+      "time": "5:00 PM - 9:00 PM",
+      "location": "City Park, 123 Park Avenue"
+    },
+    {
+      "date": "2026-02-01",
+      "time": "12:00 PM - 4:00 PM",
+      "location": "Community Center, 456 Oak Street"
+    },
+    {
+      "date": "2026-02-03",
+      "time": "11:00 AM - 2:00 PM",
+      "location": "Tech Business Park, Building A"
+    },
+    {
+      "date": "2026-02-08",
+      "time": "10:00 AM - 3:00 PM",
+      "location": "County Fair Grounds"
+    }
+  ]
+}
