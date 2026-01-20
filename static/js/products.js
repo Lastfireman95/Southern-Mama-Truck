@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Load and display products
 async function loadProducts() {
     const productsList = document.getElementById('products-list');
-    productsList.innerHTML = '<div class="loading">Loading menu...</div>';
+    productsList.innerHTML = '<div class="loading">Loading our stuff...</div>';
 
     try {
         const response = await fetch('/api/products');
@@ -17,11 +17,11 @@ async function loadProducts() {
         if (data.products && data.products.length > 0) {
             displayProducts(data.products);
         } else {
-            productsList.innerHTML = '<p class="empty-state">Menu coming soon!</p>';
+            productsList.innerHTML = '<p class="empty-state">Stuff coming soon!</p>';
         }
     } catch (error) {
         console.error('Error loading products:', error);
-        productsList.innerHTML = '<p class="error-state">Unable to load menu. Please try again later.</p>';
+        productsList.innerHTML = '<p class="error-state">Unable to load our stuff. Please try again later.</p>';
     }
 }
 
