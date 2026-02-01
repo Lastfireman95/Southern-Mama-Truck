@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Us - Southern Mommas Delight</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">            <a href="admin.html" class="admin-link">🔐 Admin</a>            <h1>�️ Southern Mommas Delight 🌾</h1>
+            <p class="tagline">Down-Home products from Our Barn to Your Heart</p>
+            <nav class="nav-menu">
+                <a href="/" class="nav-link">Home</a>
+                <a href="products.html" class="nav-link">Our Stuff</a>
+                <a href="events.html" class="nav-link active">Book Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Event Request Section -->
+        <section id="event-request" class="section">
+            <h2>🎉 Bring the Barn to Your Event</h2>
+            <p class="section-intro">Want our down-home products at your next gathering? Fill out the form below!</p>
+            
+            <form id="event-form" class="event-form">
+                <div class="form-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="event-date">Event Date *</label>
+                    <input type="date" id="event-date" name="event_date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Event Location *</label>
+                    <input type="text" id="location" name="location" placeholder="Address or venue name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="event-type">Event Type *</label>
+                    <select id="event-type" name="event_type" required>
+                        <option value="">Select event type...</option>
+                        <option value="birthday">Birthday Party</option>
+                        <option value="wedding">Wedding</option>
+                        <option value="corporate">Corporate Event</option>
+                        <option value="festival">Festival/Fair</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="guest-count">Expected Guest Count *</label>
+                    <input type="number" id="guest-count" name="guest_count" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="details">Additional Details</label>
+                    <textarea id="details" name="details" rows="4" placeholder="Tell us more about your event..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+
+            <div id="form-message" class="form-message"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Southern Mommas Delight. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="static/js/events.js"></script>
+</body>
+</html>

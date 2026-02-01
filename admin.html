@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Southern Mommas Delight</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 4rem auto;
+        }
+        .login-form {
+            background: linear-gradient(to bottom, #fbe9e7 0%, #efebe9 100%);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 3px solid #a1887f;
+        }
+        .login-title {
+            color: #c85a17;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🏚️ Southern Mommas Delight 🌾</h1>
+            <p class="tagline">Admin Access</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="login-container">
+            <form id="login-form" class="login-form">
+                <h2 class="login-title">Admin Login</h2>
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Login</button>
+                
+                <div id="login-message" class="form-message"></div>
+            </form>
+            
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="/" style="color: #c85a17;">← Back to Home</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Southern Mommas Delight. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const messageDiv = document.getElementById('login-message');
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    messageDiv.textContent = 'Login successful! Redirecting...';
+                    messageDiv.className = 'form-message success';
+                    setTimeout(() => {
+                        window.location.href = '/admin_dashboard.html';
+                    }, 1000);
+                } else {
+                    messageDiv.textContent = data.error || 'Login failed';
+                    messageDiv.className = 'form-message error';
+                }
+            } catch (error) {
+                messageDiv.textContent = 'An error occurred. Please try again.';
+                messageDiv.className = 'form-message error';
+            }
+        });
+    </script>
+</body>
+</html>
